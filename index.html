@@ -4,61 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Varastan Kyniä</title>
+
+    <style>
+        p, label, a {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        div {
+            border-radius: 1rem; padding: 10px; margin: 10px;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 32px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1 style="font-family: Arial, Helvetica, sans-serif;">Kynäkauppa!</h1>
-    <h3 style="font-family: Arial, Helvetica, sans-serif;">Aina halvat hinnat, luotettava palvelu</h3>
-    <p style="font-family: Arial, Helvetica, sans-serif;">Kynät voi olla varastettuja HUOM</p>
-    <div style="background-color: rgb(145, 92, 226); border-radius: 1rem; padding: 10px; margin: 10px;">
-        <label for="kyna" style="font-family: Arial, Helvetica, sans-serif;">Valitse kynä:</label>
+    <h1>Kynäkauppa!</h1>
+    <h3>Aina halvat hinnat, luotettava palvelu</h3>
+    <div style="background-color: rgb(145, 92, 226);">
+        <label for="kyna">Valitse kynä:</label>
+            <select name="kyna" id="kyna">
+                <option value="Lyijykynä">Lyijykynä</option>
+                <option value="Nakerrettu Lyijykynä">Nakerrettu lyijykynä</option>
+            </select>
 
-<select name="kyna" id="kyna">
-  <option value="Lyijykyna">Lyijykynä</option>
-  <option value="PuolikasLyijykyna">Puolikas lyijykynä</option>
-</select>
     <form id="discordForm">
         <input placeholder="Osoitteesi..." id="address">
         <input type="submit">
     </form>
-        <p id="tila" style="font-family: Arial, Helvetica, sans-serif;">Ei vielä tilattu!</p>
+        <p id="status">Ei vielä tilattu!</p>
     </div>
     
 
-    <div style="background-color: chartreuse; border-radius: 1rem; padding: 10px; margin: 10px;">
-        <p style="font-family: Arial, Helvetica, sans-serif;">Lyijykynä</p>
-        <img src="./135840_r_1.webp" style="width: 200px; height: auto; border-radius: 32px;">
-        <p style="font-family: Arial, Helvetica, sans-serif;">300€</p>
-        <p style="font-family: Arial, Helvetica, sans-serif;">Varastossa: 50372 kpl</p>
-        <a href="https://youtu.be/xvFZjo5PgG0" style="font-family: Arial, Helvetica, sans-serif;">Lisätiedot täältä!</a>
-    </div>
-    <div style="background-color: chartreuse; border-radius: 1rem; padding: 10px; margin: 10px;">
-        <p style="font-family: Arial, Helvetica, sans-serif;">Nakerrettuchan lyijykynä</p>
-        <img src="./360_F_261823961_a2hJp7s8ufKlMn2oacYr2XfWfioxYHZy.jpg" style="width: 200px; height: auto; border-radius: 32px;">
-        <p style="font-family: Arial, Helvetica, sans-serif;">150€</p>
-        <p style="font-family: Arial, Helvetica, sans-serif;">Varastossa: 103637393 kpl</p>
-        <a href="https://youtu.be/xvFZjo5PgG0" style="font-family: Arial, Helvetica, sans-serif;">Lisätiedot täältä!</a>
+    <div style="background-color: chartreuse;">
+        <h2>Lyijykynä</h2>
+        <img src="./135840_r_1.webp">
+        <h4 style="margin-bottom: 0;">100€</h4>
+        <p style="margin-top: 0;">Varastossa: 51472 kpl</p>
+        <button onclick="rickroll()">Muuta...</a>
     </div>
 
+    <iframe id="rickroll" width="70%" height="600" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: none;"></iframe>
+
+    <div style="background-color: chartreuse;">
+        <h2>Nakerrettu lyijykynä</h2>
+        <img src="./360_F_261823961_a2hJp7s8ufKlMn2oacYr2XfWfioxYHZy.jpg">
+        <h4 style="margin-bottom: 0;">30€</h4>
+        <p style="margin-top: 0;">Varastossa: 1034679 kpl</p>
+        <button onclick="rickroll()">Muuta...</a>
+    </div>
+
+    <div style="background-color: chartreuse;">
+        <h2>Katkaistu lyijykynä</h2>
+        <img src="./istockphoto-177138710-612x612.jpg">
+        <h4 style="margin-bottom: 0;">40€</h4>
+        <p style="margin-top: 0;">Varastossa: 3204544 kpl</p>
+        <button onclick="rickroll()">Muuta...</a>
+    </div>
+
+    <div style="background-color: chartreuse;">
+        <h2>Lyhyt lyijykynä</h2>
+        <img src="./360_F_1708367966_I4XNgwjnlqQPITgr6beZwq1hhP5yaUrt.jpg">
+        <h4 style="margin-bottom: 0;">50€</h4>
+        <p style="margin-top: 0;">Varastossa: 2038575 kpl</p>
+        <button onclick="rickroll()">Muuta...</a>
+    </div>
+
+    
+    <p style="font-size: 11px;">Huom. Kynät voivat olla varastettuja</p>
     <script>
     const form = document.getElementById('discordForm');
-    const tilaTeksti = document.getElementById('tila');
+    const statusText = document.getElementById('status');
 
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
-        const viesti = document.getElementById('address').value;
+        const msg = document.getElementById('address').value;
         const kyna = document.getElementById('kyna').value;
         const webhookURL = 'https://discord.com/api/webhooks/1570684014757421076/Cp7C9LEJKqgaL_7O961nsWN10z6yb0_9pQ8js7l2QTqSBZkMBAeKqWICGz3N6yUvAFEc';
     
-    if (viesti === ''){
-        tilaTeksti.textContent = 'Osoite uupuu!';
-        tilaTeksti.style.color = '#f04747';
+    if (msg === ''){
+        statusText.textContent = 'Osoite uupuu!';
+        statusText.style.color = '#f04747';
     } else {
         const data = {
-            content: viesti + ", " + kyna
+            content: kyna + " tilattu osoitteeseen " + msg
         };
 
         try {
-            const vastaus = await fetch(webhookURL, {
+            const response = await fetch(webhookURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -66,19 +107,25 @@
                 body: JSON.stringify(data)
             });
 
-            if (vastaus.ok) {
-                tilaTeksti.textContent = 'Kiitos asioinnista! Vein juuri tietosi';
-                tilaTeksti.style.color = '#43b581';
+            if (response.ok) {
+                statusText.textContent = 'Kiitos asioinnista! Vein juuri tietosi';
+                statusText.style.color = '#43b581';
                 form.reset();
             } else {
-                tilaTeksti.textContent = 'Virhe tilauksessa!';
-                tilaTeksti.style.color = '#f04747';
+                statusText.textContent = 'Virhe tilauksessa!';
+                statusText.style.color = '#f04747';
             }
         } catch (virhe) {
-            tilaTeksti.textContent = 'Verkkovirhe. Yritä uudelleen.';
-            tilaTeksti.style.color = '#f04747';
+            statusText.textContent = 'Verkkovirhe. Yritä uudelleen.';
+            statusText.style.color = '#f04747';
         }}
     });
+
+    function rickroll(){
+        const rickroll = document.getElementById("rickroll");
+        rickroll.style.display = "block";
+        rickroll.src = "https://www.youtube-nocookie.com/embed/QDia3e12czc?si=uSyLeta4IuE_Fmme&amp;controls&autoplay=1"
+    }
     </script>
 </body>
 </html>
