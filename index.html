@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
 <body>
     <h1 style="font-family: Arial, Helvetica, sans-serif;">Kynäkauppa!</h1>
     <h3 style="font-family: Arial, Helvetica, sans-serif;">Aina halvat hinnat, luotettava palvelu</h3>
+    <p style="font-family: Arial, Helvetica, sans-serif;">Kynät voi olla varastettuja HUOM</p>
     <div style="background-color: rgb(145, 92, 226); border-radius: 1rem; padding: 10px; margin: 10px;">
         <label for="kyna" style="font-family: Arial, Helvetica, sans-serif;">Valitse kynä:</label>
 
@@ -16,10 +17,10 @@
   <option value="PuolikasLyijykyna">Puolikas lyijykynä</option>
 </select>
     <form id="discordForm">
-    <input placeholder="Osoitteesi..." id="address">
-    <input type="submit">
+        <input placeholder="Osoitteesi..." id="address">
+        <input type="submit">
     </form>
-    <p id="tila" style="font-family: Arial, Helvetica, sans-serif;">Ei vielä tilattu!</p>
+        <p id="tila" style="font-family: Arial, Helvetica, sans-serif;">Ei vielä tilattu!</p>
     </div>
     
 
@@ -27,14 +28,14 @@
         <p style="font-family: Arial, Helvetica, sans-serif;">Lyijykynä</p>
         <img src="./135840_r_1.webp" style="width: 200px; height: auto; border-radius: 32px;">
         <p style="font-family: Arial, Helvetica, sans-serif;">300€</p>
-<p style="font-family: Arial, Helvetica, sans-serif;">Varastossa: 50372 kpl</p>
+        <p style="font-family: Arial, Helvetica, sans-serif;">Varastossa: 50372 kpl</p>
         <a href="https://youtu.be/xvFZjo5PgG0" style="font-family: Arial, Helvetica, sans-serif;">Lisätiedot täältä!</a>
     </div>
     <div style="background-color: chartreuse; border-radius: 1rem; padding: 10px; margin: 10px;">
-        <p style="font-family: Arial, Helvetica, sans-serif;">Puolikas lyijykynä</p>
+        <p style="font-family: Arial, Helvetica, sans-serif;">Nakerrettuchan lyijykynä</p>
         <img src="./360_F_261823961_a2hJp7s8ufKlMn2oacYr2XfWfioxYHZy.jpg" style="width: 200px; height: auto; border-radius: 32px;">
         <p style="font-family: Arial, Helvetica, sans-serif;">150€</p>
-<p style="font-family: Arial, Helvetica, sans-serif;">Varastossa: 103637393 kpl</p>
+        <p style="font-family: Arial, Helvetica, sans-serif;">Varastossa: 103637393 kpl</p>
         <a href="https://youtu.be/xvFZjo5PgG0" style="font-family: Arial, Helvetica, sans-serif;">Lisätiedot täältä!</a>
     </div>
 
@@ -44,13 +45,14 @@
 
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
-
         const viesti = document.getElementById('address').value;
         const kyna = document.getElementById('kyna').value;
         const webhookURL = 'https://discord.com/api/webhooks/1570684014757421076/Cp7C9LEJKqgaL_7O961nsWN10z6yb0_9pQ8js7l2QTqSBZkMBAeKqWICGz3N6yUvAFEc';
-if (viesti = ""){
- tilaTeksti.textContent = 'Osoite uupuu!'
-} else {
+    
+    if (viesti === ''){
+        tilaTeksti.textContent = 'Osoite uupuu!';
+        tilaTeksti.style.color = '#f04747';
+    } else {
         const data = {
             content: viesti + ", " + kyna
         };
@@ -75,8 +77,8 @@ if (viesti = ""){
         } catch (virhe) {
             tilaTeksti.textContent = 'Verkkovirhe. Yritä uudelleen.';
             tilaTeksti.style.color = '#f04747';
-        }
-    })};
+        }}
+    });
     </script>
 </body>
 </html>
