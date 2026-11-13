@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varastan Kyniä</title>
+</head>
+<body>
+    <h1 style="font-family: Arial, Helvetica, sans-serif;">Kynäkauppa!</h1>
+    <h3 style="font-family: Arial, Helvetica, sans-serif;">Aina halvat hinnat, luotettava palvelu</h3>
+    <div style="background-color: rgb(145, 92, 226); border-radius: 1rem; padding: 10px; margin: 10px;">
+        <label for="kyna" style="font-family: Arial, Helvetica, sans-serif;">Valitse kynä:</label>
+
+<select name="kyna" id="kyna">
+  <option value="Lyijykyna">Lyijykynä</option>
+  <option value="PuolikasLyijykyna">Puolikas lyijykynä</option>
+</select>
+    <form id="discordForm">
+    <input placeholder="Osoitteesi..." id="address">
+    <input type="submit">
+    </form>
+    <p id="tila" style="font-family: Arial, Helvetica, sans-serif;">Ei vielä tilattu!</p>
+    </div>
+    
+
+    <div style="background-color: chartreuse; border-radius: 1rem; padding: 10px; margin: 10px;">
+        <p style="font-family: Arial, Helvetica, sans-serif;">Lyijykynä</p>
+        <img src="./135840_r_1.webp" style="width: 200px; height: auto; border-radius: 32px;">
+        <p style="font-family: Arial, Helvetica, sans-serif;">300€</p>
+        <a href="https://youtu.be/xvFZjo5PgG0" style="font-family: Arial, Helvetica, sans-serif;">Osta täältä!</a>
+    </div>
+    <div style="background-color: chartreuse; border-radius: 1rem; padding: 10px; margin: 10px;">
+        <p style="font-family: Arial, Helvetica, sans-serif;">Puolikas lyijykynä</p>
+        <img src="./360_F_261823961_a2hJp7s8ufKlMn2oacYr2XfWfioxYHZy.jpg" style="width: 200px; height: auto; border-radius: 32px;">
+        <p style="font-family: Arial, Helvetica, sans-serif;">150€</p>
+        <a href="https://youtu.be/xvFZjo5PgG0" style="font-family: Arial, Helvetica, sans-serif;">Osta täältä!</a>
+    </div>
+
+    <script>
+    const form = document.getElementById('discordForm');
+    const tilaTeksti = document.getElementById('tila');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const viesti = document.getElementById('address').value;
+        const kyna = document.getElementById('kyna').value;
+        const webhookURL = 'https://discord.com/api/webhooks/1570684014757421076/Cp7C9LEJKqgaL_7O961nsWN10z6yb0_9pQ8js7l2QTqSBZkMBAeKqWICGz3N6yUvAFEc';
+
+        const data = {
+            content: viesti + ", " + kyna
+        };
+
+        try {
+            const vastaus = await fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (vastaus.ok) {
+                tilaTeksti.textContent = 'Kiitos asioinnista! Vein juuri tietosi';
+                tilaTeksti.style.color = '#43b581';
+                form.reset();
+            } else {
+                tilaTeksti.textContent = 'Virhe tilauksessa!';
+                tilaTeksti.style.color = '#f04747';
+            }
+        } catch (virhe) {
+            tilaTeksti.textContent = 'Verkkovirhe. Yritä uudelleen.';
+            tilaTeksti.style.color = '#f04747';
+        }
+    });
+    </script>
+</body>
+</html>
