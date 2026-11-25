@@ -36,7 +36,6 @@
 </div>
 
     <div style="background-color: rgb(145, 92, 226);">
-<h1>Kynätilaukset alhaalla! Ken tietää milloin voit taas tilata...</h1>
         <label for="kyna">Valitse kynä:</label>
             <select name="kyna" id="kyna">
                 <option value="Lyijykynä">Lyijykynä</option>
@@ -52,6 +51,7 @@
         <input type="submit">
     </form>
         <p id="status">Ei vielä tilattu!</p>
+        <p>Toimitusaika noin 2-5 työpäivää MAKSUSTA! Toimitusaika voi vaihdella HUOM (voi kestää esim. 100 vuotta :)</p>
     </div>
     
 
@@ -116,7 +116,7 @@
         event.preventDefault();
         const msg = document.getElementById('address').value;
         const kyna = document.getElementById('kyna').value;
-        const webhookURL = 'https://discord.com/api/webhooks/1570684014757421076/Cp7C9LEJKqgaL_7O961nsWN10z6yb0_9pQ8js7l2QTqSBZkMBAeKqWICGz3N6yUvAFEc';
+        const webhookURL = 'https://kynatilaukset.suklaasukkulayt.workers.dev/';
     
     if (msg === ''){
         statusText.textContent = 'Osoite uupuu!';
@@ -128,11 +128,9 @@
 
         try {
             const response = await fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ content: "viesti" }),
             });
 
             if (response.ok) {
