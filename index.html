@@ -158,10 +158,10 @@
         statusText.textContent = 'Osoite uupuu!';
         statusText.style.color = '#f04747';
     } else {
-        const data = {
-            content: number + " kappaletta tuotetta " + kyna + " tilattu osoitteeseen " + msg
-        };
-
+        if (kyna === "Kumi" && number > 3){
+            statusText.textContent = 'Ei tarpeeksi varastossa!!';
+            statusText.style.color = '#f04747';
+        } else {
         try {
             const response = await fetch(webhookURL, {
                   method: "POST",
@@ -180,7 +180,7 @@
         } catch (virhe) {
             statusText.textContent = 'Verkkovirhe. Yritä uudelleen.';
             statusText.style.color = '#f04747';
-        }}
+        }}}
     });
 
     function rickroll(){
