@@ -61,6 +61,7 @@
 
     <form id="discordForm">
         <input placeholder="Osoitteesi..." id="address">
+        <input placeholder="Kuinka monta?" type="number" id="number" required>
         <input type="submit">
     </form>
         <p id="status">Ei vielä tilattu!</p>
@@ -150,6 +151,7 @@
         event.preventDefault();
         const msg = document.getElementById('address').value;
         const kyna = document.getElementById('kyna').value;
+        const number = document.getElementById('number').value;
         const webhookURL = 'https://kynatilaukset.suklaasukkulayt.workers.dev/';
     
     if (msg === ''){
@@ -157,7 +159,7 @@
         statusText.style.color = '#f04747';
     } else {
         const data = {
-            content: kyna + " tilattu osoitteeseen " + msg
+            content: number + "kappaletta tuotetta " + kyna + " tilattu osoitteeseen " + msg;
         };
 
         try {
