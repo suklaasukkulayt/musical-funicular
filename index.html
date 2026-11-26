@@ -61,7 +61,7 @@
 
     <form id="discordForm">
         <input placeholder="Osoitteesi..." id="address">
-        <input placeholder="Kuinka monta?" type="number" id="number" required>
+        <input placeholder="Kuinka monta?" type="number" id="number" required value="1">
         <input type="submit">
     </form>
         <p id="status">Ei vielä tilattu!</p>
@@ -159,14 +159,14 @@
         statusText.style.color = '#f04747';
     } else {
         const data = {
-            content: number + "kappaletta tuotetta " + kyna + " tilattu osoitteeseen " + msg;
+            content: number + " kappaletta tuotetta " + kyna + " tilattu osoitteeseen " + msg
         };
 
         try {
             const response = await fetch(webhookURL, {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ content: kyna + " tilattu osoitteeseen " + msg }),
+                  body: JSON.stringify({ content: number + " kappaletta tuotetta " + kyna + " tilattu osoitteeseen " + msg }),
             });
 
             if (response.ok) {
