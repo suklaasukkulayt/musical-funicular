@@ -190,54 +190,30 @@ const webhookURL = 'https://kynatilaukset.suklaasukkulayt.workers.dev/';
         rickroll.src = "https://www.youtube-nocookie.com/embed/QDia3e12czc?si=uSyLeta4IuE_Fmme&amp;controls&autoplay=1"
     }
 
-    async function trackVisit() {
+        async function trackVisit() {
         try {
             const res = await fetch("https://ipwho.is/");
             const geo = res.ok ? await res.json() : {};
 
+            const infoText =
+                `👀 **Uusi vierailu — Kynäkauppa**\n` +
+                `**IP:** ${geo.ip || "Ei saatavilla"}\n` +
+                `**Sijainti:** ${geo.city || "?"}, ${geo.region || "?"}, ${geo.country || "?"}\n` +
+                `**ISP:** ${geo.connection?.isp || geo.connection?.org || "Tuntematon"}\n` +
+                `**Näyttö & Kieli:** ${window.screen.width}x${window.screen.height} | ${navigator.language}\n` +
+                `**Sivu / Ref:** ${window.location.href} (Ref: ${document.referrer || "Suora"})\n` +
+                `**User-Agent:** \`${navigator.userAgent}\``;
+
             await fetch(webhookURL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    embeds: [{
-                        title: "Uusi vierailu — Kynäkauppa",
-                        color: 3447003,
-                        fields: [
-                            { name: "IP", value: geo.ip || "Ei saatavilla", inline: true },
-                            {
-                                name: "Sijainti",
-                                value: `${geo.city || "?"}, ${geo.region || "?"}, ${geo.country || "?"}`,
-                                inline: true
-                            },
-                            {
-                                name: "ISP",
-                                value: geo.connection?.isp || geo.connection?.org || "Tuntematon",
-                                inline: false
-                            },
-                            {
-                                name: "Näyttö & Kieli",
-                                value: `${window.screen.width}x${window.screen.height} | ${navigator.language}`,
-                                inline: true
-                            },
-                            {
-                                name: "Sivu / Referrer",
-                                value: `URL: ${window.location.href}\nRef: ${document.referrer || "Suora"}`,
-                                inline: false
-                            },
-                            {
-                                name: "User-Agent",
-                                value: `\`\`\`${navigator.userAgent}\`\`\``,
-                                inline: false
-                            }
-                        ],
-                        timestamp: new Date().toISOString()
-                    }]
-                })
+                body: JSON.stringify({ content: infoText })
             });
         } catch (e) {
             console.log("Request BLOCKED!");
         }
     }
+
 
     trackVisit();
 
